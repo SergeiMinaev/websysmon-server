@@ -1,0 +1,17 @@
+[Unit]
+Description=WebSysMon Server
+After=network.target
+OnFailure=unit-status-mail@%n.service
+
+[Service]
+Type=simple
+User=<username>
+Group=<groupname>
+Environment="PATH=</path/to/websysmon_server>/venv/bin"
+WorkingDirectory=</path/to/websysmon_server>
+ExecStart=</usr/local/bin/websysmon_server_start.sh>
+TimeoutSec=10
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

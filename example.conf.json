@@ -1,0 +1,16 @@
+{
+  "entities": {
+    "MyProject": {
+      "systemd_services": {
+        "myproject_service1": {},
+        "myproject_service2": {},
+        "myproject_service3": {}
+      }
+  }
+  },
+  "global": {
+    "partitions": {
+      "/": {}
+    }
+  }
+}
