@@ -1,13 +1,16 @@
 #!/bin/env python3
+import os
 import json
 import pytz
 import subprocess
 from datetime import datetime
 
+dir_path = os.path.dirname(os.path.realpath(__file__))
 
-f = open("conf.json")
+f = open(os.path.join(dir_path, "conf.json"))
 conf = json.load(f)
 f.close()
+
 
 
 def now_utc_dt() -> datetime:
@@ -35,6 +38,6 @@ for part in conf['global']['partitions']:
 
 
 conf['ts'] = now_utc_ts()
-out = open("state.json", "w")
+out = open(os.path.join(dir_path, "state.json"), "w")
 json.dump(conf, out)
 out.close()
