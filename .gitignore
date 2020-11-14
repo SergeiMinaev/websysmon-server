@@ -1,0 +1,5 @@
+passwd.txt
+conf.json
+state.json
+*.pyc
+*.swp
