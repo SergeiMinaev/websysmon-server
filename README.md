@@ -72,3 +72,9 @@ This should fix the problem.
 Now you should be able to get the system state (raw JSON data) from the outside via curl like this:
 curl -X POST -H "Content-Type: application/json" -d '{"passwd": yourpasswd}' http://domain.com
 
+Telegram notifications
+$ cp example.telegram_conf.json telegram_conf.json
+Register new telegram bot via @BotFather.
+Edit telegram_conf.json and specify bot's name and token.
+Also specify contacts of users (username and telegram id) who will receive notifications.
+
