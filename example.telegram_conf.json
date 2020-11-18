@@ -1,0 +1,10 @@
+{
+    "name": "@botname",
+    "token": "bottoken",
+    "contacts": [
+      {
+        "username": "Name",
+        "id": "123123123"
+      }
+    ]
+}
