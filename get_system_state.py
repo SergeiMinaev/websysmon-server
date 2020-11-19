@@ -4,7 +4,7 @@ import json
 import pytz
 import subprocess
 from datetime import datetime
-from utils import service_manager_type
+from utils import service_manager_type, hostname
 from telegram_bot import send_to_telegram
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -27,14 +27,16 @@ def get_system_state():
     for entity in conf['entities']:
         print('Checking', entity, '...')
         if sm != 'systemd':
-            print(' '.join([
-                'Error: system service manager is not systemd.',
-                'Can not check services.']))
-            return False
+            send_to_telegram(' '.join([
+                f'{hostname()}: ошибка: используемый менеджер сервисов - не systemd.',
+                'Не удаётся узнать статус сервисов.',
+                'Все сервисы помечены как неактивные.']))
         for service in conf['entities'][entity]['systemd_services']:
-            cmd = f'systemctl is-active {service}'
-            status = subprocess.check_output(cmd, shell=True).decode().strip()
-            print(f'{service} is {status}')
+            cmd = f'systemctl is-active {service}; exit 0'
+            if sm != 'systemd':
+                status = 'inactive'
+            else:
+                status = subprocess.check_output(cmd, shell=True).decode().strip()
             conf['entities'][entity]['systemd_services'][service] = {"status": status}
     for part in conf['global']['partitions']:
         cmd = f'df --output=avail -B 1 {part} | tail -n 1'
@@ -47,8 +49,10 @@ def get_system_state():
         iavail = int(subprocess.check_output(cmd, shell=True).decode().strip())
 
         conf['global']['partitions'][part] = {
-            'size': size, 'avail': avail, 'avail_perc': round(avail/size*100),
-            'itotal': itotal, 'iavail': iavail, 'iavail_perc': round(iavail/itotal*100),
+            'size': size, 'avail': avail,
+            'avail_perc': round(avail/size*100),
+            'itotal': itotal, 'iavail': iavail,
+            'iavail_perc': round(iavail/itotal*100),
         }
 
 
