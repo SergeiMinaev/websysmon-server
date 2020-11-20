@@ -2,6 +2,7 @@
 import os
 import json
 import pytz
+import requests
 import subprocess
 from shutil import copyfile
 from datetime import datetime
@@ -56,19 +57,34 @@ def get_state():
             'iavail_perc': round(iavail/itotal*100),
         }
 
+    for url in conf['global']['urls']:
+        try:
+            status_code = requests.get(url).status_code
+        except:
+            status_code = None
+        conf['global']['urls'][url] = { 'status_code': status_code }
 
     conf['ts'] = now_utc_ts()
 
     return conf
 
 def update_state_files(state):
-    copyfile(
-        os.path.join(dir_path, 'state.json'),
-        os.path.join(dir_path, 'prev_state.json'))
-    print('prev state saved')
-    out = open(os.path.join(dir_path, 'state.json'), 'w')
-    json.dump(conf, out)
-    out.close()
+    state_path = os.path.join(dir_path, 'state.json')
+    prev_state_path = os.path.join(dir_path, 'prev_state.json')
+    prev_state = None
+    if os.path.isfile(state_path):
+        state_f = open(state_path, 'r')
+        prev_state = json.load(state_f)
+        state_f.close()
+    else:
+        prev_state = state
+    prev_f = open(prev_state_path, 'w')
+    json.dump(prev_state, prev_f)
+    prev_f.close()
+
+    state_f = open(state_path, 'w')
+    json.dump(state, state_f)
+    state_f.close()
 
 def get_prev_state():
     return json.load(open(os.path.join(dir_path, 'prev_state.json'), 'r'))
