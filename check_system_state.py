@@ -21,8 +21,8 @@ def check_state():
             if service[1]['status'] != 'active':
                 send_to_telegram(
                     f'{entity}: сервис неактивен: {service}')
-            elif prev_state['entities'][entity]['systemd_services'][service]\
-                    ['status'] != 'active':
+            elif prev_state['entities'][entity]['systemd_services']\
+                    [service[0]]['status'] != 'active':
                 send_to_telegram(
                     f'{entity}: сервис снова активен: {service}')
 
