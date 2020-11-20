@@ -40,7 +40,7 @@ def check_state():
                 f'{hostname()}: на разделе {part[0]} свободно менее',
                 f'{iavail_perc_min}% инодов.']))
         elif prev_state['global']['partitions'][part[0]]\
-                ['iavail_perc'] < avail_perc_min:
+                ['iavail_perc'] < iavail_perc_min:
             send_to_telegram(
                 f'{hostname()}: на разделе {part[0]} снова достаточно свободных инодов.')
 
