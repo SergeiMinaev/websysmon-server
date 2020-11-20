@@ -3,6 +3,7 @@ import os
 import json
 import pytz
 import subprocess
+from shutil import copyfile
 from datetime import datetime
 from utils import service_manager_type, hostname
 from telegram_bot import send_to_telegram
@@ -22,7 +23,7 @@ def now_utc_ts() -> int:
     return int(datetime.now(tz=pytz.utc).timestamp())
 
 
-def get_system_state():
+def get_state():
     sm = service_manager_type()
     for entity in conf['entities']:
         print('Checking', entity, '...')
@@ -57,8 +58,17 @@ def get_system_state():
 
 
     conf['ts'] = now_utc_ts()
-    out = open(os.path.join(dir_path, "state.json"), "w")
+
+    return conf
+
+def update_state_files(state):
+    copyfile(
+        os.path.join(dir_path, 'state.json'),
+        os.path.join(dir_path, 'prev_state.json'))
+    print('prev state saved')
+    out = open(os.path.join(dir_path, 'state.json'), 'w')
     json.dump(conf, out)
     out.close()
 
-    return conf
+def get_prev_state():
+    return json.load(open(os.path.join(dir_path, 'prev_state.json'), 'r'))

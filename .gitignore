@@ -1,6 +1,7 @@
 passwd.txt
 conf.json
 state.json
+prev_state.json
 telegram_conf.json
 *.pyc
 *.swp
