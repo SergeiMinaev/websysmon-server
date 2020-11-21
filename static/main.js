@@ -38,6 +38,7 @@ async function init() {
   }
 
   const remote = await call_api('remote');
+  const key = get_cookie('key');
   remote.urls.forEach(url => {
     const state = call_remote_api(
       `${url}/api/state?key=${key}`);
