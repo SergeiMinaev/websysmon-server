@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ "$0" == "bash" ]; then
+if [ "$0" == "bash" ] || [ "$0" == "-bash" ]; then
   source ./venv/bin/activate 
   echo "venv activated"
 else
