@@ -1,0 +1,9 @@
+:root {
+  --color-0: #333;
+  --color-1: #fff;
+  --color-2: #0095ff;
+  --color-ok: green;
+  --color-er: red;
+  --font-size-m: 14px;
+  --font-size-l: 22px;
+}

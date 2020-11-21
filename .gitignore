@@ -3,6 +3,8 @@ conf.json
 state.json
 prev_state.json
 telegram_conf.json
+remote.json
+gunicorn_start.sh
 *.pyc
 *.swp
 *.swo

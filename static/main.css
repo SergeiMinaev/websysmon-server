@@ -1,0 +1,92 @@
+@import '/static/_variables.css';
+
+body {
+  color: var(--color-0);
+  margin: 0;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  font-family: sans-serif;
+}
+.hidden {
+  display: none !important;
+}
+#unauth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#unauth input {
+  height: 50px;
+  width: 400px;
+  font-size: var(--font-size-l);
+}
+.btn {
+  cursor: pointer;
+  height: 50px;
+  box-sizing: border-box;
+  padding: 0 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-1);
+  background-color: var(--color-2);
+  border-radius: 5px;
+  font-weight: bold;
+  margin: 0 15px;
+}
+.btn:active {
+  transform: translateY(1px);
+}
+#content {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.entity {
+  border: 1px solid var(--color-2);
+  border-radius: 4px;
+  padding: 10px 20px;
+  margin: 15px;
+}
+.entity__title {
+  font-size: var(--font-size-l);
+  font-weight: bold;
+}
+.entity__items-title {
+  font-weight: bold;
+}
+.entity__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.entity__item-key, .entity__item-val {
+  margin: 5px 0;
+}
+.entity__item-key {
+  margin-right: 15px;
+}
+.entity__item-val {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.entity__item-status {
+  width: 28px;
+  height: 28px;
+  border-radius: 28px;
+  margin-left: 5px;
+  color: var(--color-1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.status--ok {
+  background-color: var(--color-ok);
+}
+.status--er {
+  background-color: var(--color-er);
+}
