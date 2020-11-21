@@ -29,7 +29,7 @@ Edit telegram_conf.json and specify bot's name and token.
 Also specify contacts of users (username and telegram id) who will receive notifications.
 
 Get the system state and write it to the file:
-$ ./get_system_state.py
+$ ./check_system_state.py
 This will creates state.json file. This file contains information about current system
 state. Not many details there because websysmon is pretty minimalistic.
 Tell crontab to run it every minute. Use `crontab -e` and add this line in there:
@@ -52,10 +52,11 @@ Make it work as system service (it is assumed that you use systemd):
 $ sudo cp example.websysmon_server.service /etc/systemd/system/websysmon_server.service
 $ sudo chmod 644 /etc/systemd/system/websysmon_server.service
 Edit it and specify correct paths, username and groupname.
+If you are not sure which user/group to use, check your existing systemd scripts.
 Try to run it:
-# service sm_websysmon_server start
-# service sm_websysmon_server status
-# systemctl is-active sm_websysmon_server
+# service websysmon_server start
+# service websysmon_server status
+# systemctl is-active websysmon_server
 If all works correct, the last command's output will be "active".
 
 Make it work besides Nginx:
@@ -72,8 +73,11 @@ If you see the line below, you should check permissions to the main dir (/path/t
 "connect() to unix:/path/to/websysmon_server/gunicorn.sock failed (13: Permission denied) while
 connecting to upstream"
 # chmod 755 /path/to/websysmon_server
-# service sm_websysmon_server restart
+# service websysmon_server restart
 This should fix the problem.
+
+If you see 403 "permission denied" error, it's probably because of SELinux restrictions. Try this to allow nginx to serve the directory:
+# chcon -Rt httpd_sys_content_t /path/to/websysmon_server/
 
 Now you should be able to get the system state (raw JSON data) from the outside via curl like this:
 curl -X POST -H "Content-Type: application/json" -d '{"passwd": yourpasswd}' http://domain.com
