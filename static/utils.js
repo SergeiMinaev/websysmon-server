@@ -28,6 +28,22 @@ export async function call_api(method) {
   return resp;
 }
 
+export async function call_remote_api(url) {
+  const resp = await fetch(url)
+    .then(function(response) {
+      if (response.status === 200) {
+        return response.json();
+      } else {
+        return response;
+      }
+    })
+    .catch(function(err) {
+      console.error(err);
+    });
+
+  return resp;
+}
+
 export function make_el(html) {
   let temp = document.createElement('template');
   html = html.trim();

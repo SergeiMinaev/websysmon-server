@@ -1,4 +1,10 @@
-import { get_cookie, set_cookie, call_api, make_el } from '/static/utils.js';
+import {
+  get_cookie,
+  set_cookie,
+  call_api,
+  call_remote_api,
+  make_el,
+} from '/static/utils.js';
 
 
 const key = get_cookie('key');
@@ -25,13 +31,17 @@ if (!key) {
 
 async function init() {
   unauth.classList.add('hidden');
-  const resp = await call_api('remote');
-  if (resp.status == 401) {
+  const state = await call_api('state');
+  if (state.status == 401) {
     set_cookie('key', false, 0);
     location.reload();
   }
 
-  const state = await call_api('state');
+  const remote = await call_api('remote');
+  remote.urls.forEach(url => {
+    const state = call_remote_api(
+      `${url}/api/state?key=${key}`);
+  });
   visualize(state);
   visualize(state);
   visualize(state);
