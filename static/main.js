@@ -37,15 +37,16 @@ async function init() {
     location.reload();
   }
 
+  visualize(state);
+
   const remote = await call_api('remote');
   const key = get_cookie('key');
-  remote.urls.forEach(url => {
-    const state = call_remote_api(
+  for (let index = 0; index < remote.urls.length; index++) {
+    const url = remote.urls[index];
+    const state = await call_remote_api(
       `${url}/api/state?key=${key}`);
-  });
-  visualize(state);
-  visualize(state);
-  visualize(state);
+    visualize(state);
+  };
 }
 
 function visualize(state) {
