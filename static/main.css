@@ -45,11 +45,21 @@ body {
   justify-content: center;
   align-items: flex-start;
 }
+.entities {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin: 15px;
+}
+.entities__title {
+  margin: 15px 15px 0 15px;
+  font-weight: bold;
+  opacity: .5;
+}
 .entity {
   border: 1px solid var(--color-2);
   border-radius: 4px;
   padding: 10px 20px;
-  margin: 15px;
+  margin: 15px 5px 5px 5px;
 }
 .entity__title {
   font-size: var(--font-size-l);

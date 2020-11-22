@@ -52,6 +52,9 @@ async function init() {
 function visualize(state) {
   content.classList.remove('hidden');
   const entities_el = entities_blank.cloneNode(true);
+  entities_el.appendChild(make_el(
+    `<div class="entities__title">${state.server_name}</div>`
+  ));
   entities_el.classList.remove('hidden');
   entities_el.removeAttribute('id');
   content.appendChild(entities_el);
