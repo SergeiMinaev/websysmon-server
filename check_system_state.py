@@ -1,4 +1,4 @@
-#!/bin/env python3
+#!/usr/bin/env python3
 from get_system_state import get_state, update_state_files, get_prev_state
 from telegram_bot import send_to_telegram
 from utils import hostname
