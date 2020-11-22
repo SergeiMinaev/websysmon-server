@@ -2,7 +2,7 @@
 Minimalistic python system monitor with web interface (client-server)
 
 # Requirements:
-Python 3.7
+>= Python 3.7
 
 # Installation:
 $ git clone https://github.com/SergeiMinaev/websysmon_server.git
