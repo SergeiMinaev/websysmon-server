@@ -14,7 +14,7 @@ Edit conf.json:
   conf['global']['partitions'] - list of partitions to watch.
 Make a passwd.txt file to limiting access:
 $ echo "somestrongpassword" > passwd.txt
-Yes, this simple. Correct authentication is not the goal yet.
+Yes, this simple. Correct authentication is not the goal yet. The password needs to be unique, don't use it in another services.
 
 $ virtualenv ./venv
 # Remember that minimum python version is 3.7. Set specific python binary if needed:
