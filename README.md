@@ -33,7 +33,7 @@ $ ./check_system_state.py
 This will creates state.json file. This file contains information about current system
 state. Not many details there because websysmon is pretty minimalistic.
 Tell crontab to run it every minute. Use `crontab -e` and add this line in there:
-`*/1 * * * * /path/to/websysmon_server/venv/bin/python /path/to/websysmon-server/get_system_state.py`
+`*/1 * * * * /path/to/websysmon_server/venv/bin/python /path/to/websysmon_server/check_system_state.py`
 So state.json will be updating every minute.
 
 $ sudo cp example.websysmon_server_start.sh /usr/local/bin/websysmon_server_start.sh
@@ -79,5 +79,12 @@ This should fix the problem.
 If you see 403 "permission denied" error, it's probably because of SELinux restrictions. Try this to allow nginx to serve the directory:
 # chcon -Rt httpd_sys_content_t /path/to/websysmon_server/
 
+Set-up remote websysmon servers to watch:
+$ cp example.remote.json remote.json
+If you don't need any remote servers, leave it with an empty array:
+{
+  "urls: []
+}
+
 Now you should be able to get the system state (raw JSON data) from the outside via curl like this:
-curl -X POST -H "Content-Type: application/json" -d '{"passwd": yourpasswd}' http://domain.com
+curl http://domain.com/api/state?key=<password>
