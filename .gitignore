@@ -4,6 +4,7 @@ state.json
 prev_state.json
 telegram_conf.json
 remote.json
+keys.json
 gunicorn_start.sh
 *.pyc
 *.swp

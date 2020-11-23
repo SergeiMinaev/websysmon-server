@@ -12,9 +12,12 @@ Edit conf.json:
   conf['entities'][yourproject'] - project's name;
   conf['entities'][yourproject']['systemd_services'] - systemd services to watch;
   conf['global']['partitions'] - list of partitions to watch.
-Make a passwd.txt file to limiting access:
-$ echo "somestrongpassword" > passwd.txt
-Yes, this simple. Correct authentication is not the goal yet. The password needs to be unique, don't use it in another services.
+Make a keys.json file to limiting access:
+[
+  "superstrongpassword",
+  "anotherpassword"
+]
+Yes, this simple. Correct authentication is not the goal yet. The passwords needs to be unique, don't use it in another services.
 
 $ virtualenv ./venv
 # Remember that minimum python version is 3.7. Set specific python binary if needed:
